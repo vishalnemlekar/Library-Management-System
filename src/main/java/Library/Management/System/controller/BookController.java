@@ -1,5 +1,7 @@
 package Library.Management.System.controller;
 
+import Library.Management.System.dto.BookRequest;
+import Library.Management.System.dto.BookResponse;
 import Library.Management.System.entity.Book;
 import Library.Management.System.service.BookService;
 
@@ -16,8 +18,9 @@ public class BookController {
     public BookController(BookService service) {
         this.service = service;
     }
+
     @GetMapping
-public List<Book> getAllBooks() {
+public List<BookResponse> getAllBooks() {
     return service.getAllBooks();
 }
 
@@ -27,15 +30,15 @@ public Optional<Book> getBookById(@PathVariable Long id) {
 }
 
 @PostMapping
-public Book createBook(@RequestBody Book book) {
-    return service.createBook(book);
+public BookResponse createBook(@RequestBody BookRequest request) {
+    return service.createBook(request);
 }
 
 @PutMapping("/{id}")
-public Book updateBook(@PathVariable Long id,
-                       @RequestBody Book book) {
+public BookResponse updateBook(@PathVariable Long id,
+                       @RequestBody BookRequest request) {
 
-    return service.updateBook(id, book);
+    return service.updateBook(id, request);
 }
 
 @DeleteMapping("/{id}")
